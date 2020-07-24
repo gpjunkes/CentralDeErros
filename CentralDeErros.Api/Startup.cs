@@ -2,6 +2,7 @@ using CentralDeErros.Dados;
 using CentralDeErros.Dados.Repositorio;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
+using Microsoft.AspNetCore.Identity;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
@@ -18,6 +19,7 @@ namespace CentralDeErros.Api
         {
             Configuration = configuration;
         }
+
         public void ConfigureServices(IServiceCollection services)
         {
             services.AddControllers()
@@ -25,11 +27,14 @@ namespace CentralDeErros.Api
                 Newtonsoft.Json.ReferenceLoopHandling.Ignore);
 
             services.AddScoped<IEventoRepositorio, EventoRepositorio>();
+            services.AddScoped<IUsuarioRepositorio, UsuarioRepositorio>();
 
             services.AddDbContext<Contexto>(options =>
                 options.UseSqlServer(Configuration.GetConnectionString("MyConnection")));
 
             services.AddSwaggerGen(s => s.SwaggerDoc(name: "v1", new OpenApiInfo { Title = "Central de erros - Guilheme Junkes", Version = "v1" }));
+
+            services.AddIdentity<IdentityUser, IdentityRole>().AddEntityFrameworkStores<Contexto>();
         }
         public void Configure(IApplicationBuilder app, IWebHostEnvironment env)
         {
