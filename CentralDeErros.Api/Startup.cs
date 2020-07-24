@@ -6,6 +6,7 @@ using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
+using Microsoft.OpenApi.Models;
 
 namespace CentralDeErros.Api
 {
@@ -27,6 +28,8 @@ namespace CentralDeErros.Api
 
             services.AddDbContext<Contexto>(options =>
                 options.UseSqlServer(Configuration.GetConnectionString("MyConnection")));
+
+            services.AddSwaggerGen(s => s.SwaggerDoc(name: "v1", new OpenApiInfo { Title = "Central de erros - Guilheme Junkes", Version = "v1" }));
         }
         public void Configure(IApplicationBuilder app, IWebHostEnvironment env)
         {
@@ -34,6 +37,12 @@ namespace CentralDeErros.Api
             {
                 app.UseDeveloperExceptionPage();
             }
+
+            app.UseSwagger();
+            app.UseSwaggerUI(s =>
+            {
+                s.SwaggerEndpoint(url: "/swagger/v1/swagger.json", name: "Central de erros - Guilhemrme Junkes");
+            });
 
             app.UseHttpsRedirection();
 
