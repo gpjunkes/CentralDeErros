@@ -1,10 +1,12 @@
 ﻿using CentralDeErros.Dados.Repositorio;
 using CentralDeErros.Dominio.Modelos;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using System.Collections.Generic;
 
 namespace CentralDeErros.Api.Controllers
 {
+    [Authorize]
     [Route("api/[controller]")]
     [ApiController]
     public class EventoController : ControllerBase
