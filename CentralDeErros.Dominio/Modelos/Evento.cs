@@ -12,5 +12,13 @@ namespace CentralDeErros.Dominio.Modelos
         public DateTime Data { get; set; }
         public string Descricao { get; set; }
         public string Origem { get; set; }
+        public int Status { get; set; }
+
     }
+
+    //public enum EnumStatusEvento
+    //{
+    //    Ativo = 0,
+    //    Arquivado = 1
+    //}
 }

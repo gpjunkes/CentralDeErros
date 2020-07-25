@@ -39,6 +39,11 @@ namespace CentralDeErros.Dados.Map
             builder.Property(p => p.Origem)
                 .HasColumnType("varchar(50)")
                 .IsRequired();
+
+            builder.Property(p => p.Status)
+                .HasColumnType("int")
+                .IsRequired()
+                .HasDefaultValue(0);
         }
     }
 }

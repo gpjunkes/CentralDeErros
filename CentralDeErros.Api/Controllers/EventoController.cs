@@ -24,6 +24,13 @@ namespace CentralDeErros.Api.Controllers
             return _repositorio.SelecionarTodos();
         }
 
+        [Route("{id}")]
+        [HttpGet]
+        public Evento Get(int id)
+        {
+            return _repositorio.SelecionarPorId(id);
+        }
+
         [Route("")]
         [HttpPost]
         public void Post([FromBody] Evento evento)
@@ -31,11 +38,18 @@ namespace CentralDeErros.Api.Controllers
             _repositorio.Incluir(evento);
         }
 
-        [Route("")]
-        [HttpDelete]
-        public string Delete()
+        [Route("/api/Evento/arquivar/{id}")]
+        [HttpPut]
+        public void Arquivar(int id)
         {
-            return "Hello";
+            _repositorio.Arquivar(id);
+        }
+
+        [Route("{id}")]
+        [HttpDelete]
+        public void Delete(int id)
+        {
+            _repositorio.Excluir(id);
         }
     }
 }
