@@ -1,10 +1,7 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Threading.Tasks;
+﻿using System.Threading.Tasks;
 using CentralDeErros.Dados.Repositorio;
+using CentralDeErros.Dominio.Servicos;
 using CentralDeErros.Dominio.ViewModel;
-using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
 
@@ -15,10 +12,12 @@ namespace CentralDeErros.Api.Controllers
     public class UsuarioController : ControllerBase
     {
         private readonly IUsuarioRepositorio _repo;
+        private readonly IUsuarioService _service;
 
-        public UsuarioController(IUsuarioRepositorio repo)
+        public UsuarioController(IUsuarioRepositorio repo, IUsuarioService service)
         {
             _repo = repo;
+            _service = service;
         }
 
         [HttpPost]
@@ -28,9 +27,10 @@ namespace CentralDeErros.Api.Controllers
         }
 
         [HttpPost("Login")]
-        public async Task<IdentityUser> Login(LoginViewModel login)
+        public async Task<string> Login(LoginViewModel login)
         {
-            return await _repo.Login(login.Email, login.Senha);
+            var usu = await _repo.Login(login.Email, login.Senha);
+            return _service.GerarToken(usu);
         }
     }
 }

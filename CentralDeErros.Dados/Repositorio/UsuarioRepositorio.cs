@@ -29,7 +29,7 @@ namespace CentralDeErros.Dados.Repositorio
 
         public async Task<IdentityUser> Login(string email, string senha) 
         {
-            var usuario = await _userManager.FindByNameAsync(email);
+            var usuario = await _userManager.FindByEmailAsync(email);
 
             if (usuario != null && await _userManager.CheckPasswordAsync(usuario, senha))
             {
