@@ -39,7 +39,7 @@ namespace CentralDeErros.Api
             services.AddDbContext<Contexto>(options =>
                 options.UseSqlServer(Configuration.GetConnectionString("MyConnection")));
 
-            services.AddSwaggerGen(s => s.SwaggerDoc(name: "v1", new OpenApiInfo { Title = "Central de erros - Guilheme Junkes", Version = "v1" }));
+            services.AddSwaggerGen(s => s.SwaggerDoc(name: "v1", new OpenApiInfo { Title = "Central de erros - Guilherme Junkes", Version = "v1" }));
 
             services.AddIdentity<IdentityUser, IdentityRole>().AddEntityFrameworkStores<Contexto>();
 
@@ -78,7 +78,7 @@ namespace CentralDeErros.Api
             app.UseSwagger();
             app.UseSwaggerUI(s =>
             {
-                s.SwaggerEndpoint(url: "/swagger/v1/swagger.json", name: "Central de erros - Guilhemrme Junkes");
+                s.SwaggerEndpoint(url: "/swagger/v1/swagger.json", name: "Central de erros - Guilherme Junkes");
             });
 
             app.UseHttpsRedirection();
